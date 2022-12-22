@@ -1,8 +1,12 @@
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class TesteCampoTreinamento {
 	
@@ -35,6 +39,102 @@ public class TesteCampoTreinamento {
 	
 }
 
+@Test
 
+public void deveInteragirComRadioButton() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	driver.findElement(By.id("elementosForm:sexo:0")).click();
+	
+	Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
+	driver.quit();
 
 }
+@Test
+
+public void deveInteragirCheckBox() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
+	
+	Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:3")).isSelected());
+	driver.quit();
+}
+@Test
+
+public void deveInteragirComCombo() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+	Select combo = new Select(element);
+	//combo.selectByIndex(4);
+	//combo.selectByValue("superior");
+	combo.selectByVisibleText("Superior");	
+	Assert.assertEquals("Superior", combo.getFirstSelectedOption().getText());
+
+	driver.quit();
+
+}
+@Test
+
+public void deveVerificarValorCombo() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+	Select combo = new Select(element);
+	List<WebElement>options = combo.getOptions();
+	Assert.assertEquals(8,options.size() );
+	
+	boolean encontrou = false;
+	for(WebElement option: options) {
+		if(option.getText().equals("Mestrado")) {
+			encontrou = true;
+			break;
+			
+		}
+	}
+	Assert.assertTrue(encontrou);
+	driver.quit();
+	
+}
+
+@Test
+
+public void deveVerificarValorComboMultiplo() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+	Select combo = new Select(element);
+	combo.selectByVisibleText("Natacao");	
+	combo.selectByVisibleText("Corrida");
+	combo.selectByVisibleText("O que eh esporte?");
+	
+	
+	List<WebElement>allSelectedOptions = combo.getAllSelectedOptions();
+	Assert.assertEquals(3, allSelectedOptions.size());
+	
+	driver.quit();
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TesteCampoTreinamento {
+	
+	
+@Test
+	
+	public void testeTreinamento() {
+		System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("file:///C:/Projetos/Udemy/componentes.html");
+		Assert.assertEquals("Google", driver.getTitle());
+		
+		//driver.quit();
+		
+}
+}

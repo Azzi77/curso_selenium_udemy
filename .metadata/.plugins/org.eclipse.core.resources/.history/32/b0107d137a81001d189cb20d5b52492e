@@ -1,0 +1,16 @@
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class TesteGoogle {
+	
+	@Test	
+	
+	public void teste() {
+		System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+		ChromeDriver driver = new ChromeDriver();
+		
+		driver.get("https://www.google.com");
+		System.out.println(driver.getTitle());
+	}
+
+}
