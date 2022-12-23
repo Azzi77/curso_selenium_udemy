@@ -125,7 +125,53 @@ public void deveVerificarValorComboMultiplo() {
 	
 	driver.quit();
 }
+
+@Test
+
+public void deveInteragirComBotao() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	WebElement botao = driver.findElement(By.id("buttonSimple"));
+	botao.click();
+			
+	Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
+					
+	
+	driver.quit();
+	
 }
+
+@Test
+
+public void deveInteragirComLink() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	driver.findElement(By.linkText("Voltar")).click();
+	Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+	driver.quit();
+}
+
+@Test
+
+public void deveBuscarTextoNaPagina() {
+	System.getProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	
+	// Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Campo de Treinamento"));
+	  Assert.assertEquals("Campo de Treinamento", driver.findElement(By.tagName("h3")).getText());
+	  Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", driver.findElement(By.className("facilAchar")).getText());
+	    
+	  
+	driver.quit();
+}
+}
+
+
 
 
 
